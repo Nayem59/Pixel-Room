@@ -12,10 +12,14 @@ app.use(express.static("app"));
 
 // Handle Socket.IO connections
 io.on("connection", (socket) => {
-  console.log("A user connected");
+  console.log("A user connected: ", socket.id);
   socket.on("disconnect", () => {
-    console.log("A user disconnected");
+    console.log("A user disconnected: ", socket.id);
   });
+  socket.on("message", (msg) => {
+    console.log(msg);
+  });
+  socket.emit("message", "Hello, a message from the server");
 });
 
 // Start the server
