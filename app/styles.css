@@ -21,13 +21,14 @@ body {
     }
   }
 
-  .new-room-container {
+  .new-room-form {
     display: flex;
     /* border: 2px solid black;
     border-radius: 7px;
     padding: 10px; */
     width: 50%;
     justify-content: center;
+    margin-bottom: 20px;
 
     .input-container {
       display: flex;
