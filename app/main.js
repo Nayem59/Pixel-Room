@@ -1,4 +1,4 @@
-// const socket = io("http://localhost:3000"); // Connect to your server
+const socket = io("http://localhost:3000"); // Connect to your server
 
 const newRoomForm = document.querySelector(".new-room-form");
 const newRoomInput = document.querySelector(".new-room-input");
@@ -29,28 +29,29 @@ newRoomForm.addEventListener("submit", (event) => {
   roomName = null;
   newDiv.className = "room";
 
-  newDiv.addEventListener("click", (event) => {
-    const roomName = event.target.innerText;
-    console.log(`You clicked on Room ${roomName}`);
-  });
-
   roomContainer.appendChild(newDiv);
 });
 
-// // Handle connection
-// socket.on("connect", () => {
-//   console.log("Connected to the server with ID:", socket.id);
-// });
+roomContainer.addEventListener("click", (event) => {
+  if (event.target.classList.contains("room")) {
+    console.log(event.target.innerText);
+  }
+});
 
-// // Handle messages from the server
-// socket.on("message", (msg) => {
-//   console.log("Message from server:", msg);
-// });
+// Handle connection
+socket.on("connect", () => {
+  console.log("Connected to the server with ID:", socket.id);
+});
 
-// // Handle disconnection
-// socket.on("disconnect", () => {
-//   console.log("Disconnected from the server");
-// });
+// Handle messages from the server
+socket.on("message", (msg) => {
+  console.log("Message from server:", msg);
+});
 
-// // Emit a message to the server
-// socket.emit("message", "Hello, a message from the client");
+// Handle disconnection
+socket.on("disconnect", () => {
+  console.log("Disconnected from the server");
+});
+
+// Emit a message to the server
+socket.emit("message", "Hello, a message from the client");
