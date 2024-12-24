@@ -1,8 +1,22 @@
+import App from "./App.js";
+import HomeComponent from "./components/HomeComponent.js";
+import RoomComponent from "./components/RoomComponent.js";
+
 const socket = io("http://localhost:3000"); // Connect to your server
 
 const newRoomForm = document.querySelector(".new-room-form");
 const newRoomInput = document.querySelector(".new-room-input");
 const roomContainer = document.querySelector(".room-container");
+
+// Global app state
+const state = {
+  rooms: [],
+  currentRoom: null,
+};
+
+const app = new App();
+const home = new HomeComponent();
+const room = new RoomComponent("testName");
 
 let roomName = null;
 let roomNames = [];
