@@ -1,13 +1,12 @@
 import App from "./App.js";
-const socket = io("http://localhost:3000"); // Connect to your server
 
-export const app = new App();
-
+export const socket = io("http://localhost:3000"); // Connect to your server
 // Global app state
 export const state = {
   rooms: [],
   currentRoom: null,
 };
+export const app = new App();
 
 // Handle connection
 socket.on("connect", () => {

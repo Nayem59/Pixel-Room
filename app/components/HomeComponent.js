@@ -1,4 +1,5 @@
-import { state } from "../main.js";
+import { app, state } from "../main.js";
+import RoomComponent from "./RoomComponent.js";
 
 class HomeComponent {
   constructor() {
@@ -35,6 +36,8 @@ class HomeComponent {
 
         state.rooms.push(roomName);
         roomInput.value = "";
+        history.pushState({}, "", `/room/${roomName}`);
+        app.setComponent(new RoomComponent(roomName));
       });
 
     // Attach click event to room items
@@ -44,6 +47,7 @@ class HomeComponent {
         if (event.target.classList.contains("room")) {
           const roomName = event.target.innerText;
           history.pushState({}, "", `/room/${roomName}`);
+          app.setComponent(new RoomComponent(roomName));
         }
       });
 

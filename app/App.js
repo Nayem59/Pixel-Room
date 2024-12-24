@@ -1,5 +1,5 @@
-import HomeComponent from "./components/HomeComponent";
-import RoomComponent from "./components/RoomComponent";
+import HomeComponent from "./components/HomeComponent.js";
+import RoomComponent from "./components/RoomComponent.js";
 
 class App {
   constructor() {
