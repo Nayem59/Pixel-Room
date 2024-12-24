@@ -1,6 +1,4 @@
 import App from "./App.js";
-import HomeComponent from "./components/HomeComponent.js";
-import RoomComponent from "./components/RoomComponent.js";
 const socket = io("http://localhost:3000"); // Connect to your server
 
 export const app = new App();
@@ -10,9 +8,6 @@ export const state = {
   rooms: [],
   currentRoom: null,
 };
-
-const home = new HomeComponent();
-const room = new RoomComponent("testName");
 
 // Handle connection
 socket.on("connect", () => {
