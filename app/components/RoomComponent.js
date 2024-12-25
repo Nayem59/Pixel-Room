@@ -5,12 +5,13 @@ class RoomComponent {
   constructor(roomName) {
     this.roomName = roomName;
     this.element = document.createElement("div");
+    this.element.className = "room-component";
   }
 
   render() {
     this.element.innerHTML = `
+      <button id="back-btn">⬅ Back</button>
       <div class="room-header">
-        <button id="back-btn">⬅ Back</button>
         <h2>Room: ${this.roomName}</h2>
       </div>
       <div class="chat-container">

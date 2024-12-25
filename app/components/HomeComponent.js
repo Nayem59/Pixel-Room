@@ -4,6 +4,7 @@ import RoomComponent from "./RoomComponent.js";
 class HomeComponent {
   constructor() {
     this.element = document.createElement("div");
+    this.element.className = "home-component";
   }
 
   render() {
@@ -16,8 +17,10 @@ class HomeComponent {
         <button type="submit">Create</button>
       </form>
       <div class="room-container">
-        <h1>Current active Rooms</h1>
+        <h2>Current active Rooms</h2>
+        <div class="rooms">
         ${state.rooms.map((room) => `<div class="room">${room}</div>`).join("")}
+        </div>
       </div>
     `;
 
