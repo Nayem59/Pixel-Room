@@ -1,4 +1,4 @@
-import { app, state } from "../main.js";
+import { app, socket, state } from "../main.js";
 import RoomComponent from "./RoomComponent.js";
 
 class HomeComponent {
@@ -41,6 +41,7 @@ class HomeComponent {
         roomInput.value = "";
         history.pushState({}, "", `/room/${roomName}`);
         app.setComponent(new RoomComponent(roomName));
+        socket.emit("join-room", roomName);
       });
 
     // Attach click event to room items
@@ -51,6 +52,7 @@ class HomeComponent {
           const roomName = event.target.innerText;
           history.pushState({}, "", `/room/${roomName}`);
           app.setComponent(new RoomComponent(roomName));
+          socket.emit("join-room", roomName);
         }
       });
 

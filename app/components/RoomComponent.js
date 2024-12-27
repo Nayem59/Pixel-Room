@@ -27,6 +27,7 @@ class RoomComponent {
     this.element.querySelector("#back-btn").addEventListener("click", () => {
       history.pushState({}, "", "/");
       app.setComponent(new HomeComponent());
+      socket.emit("leave-room", this.roomName);
     });
 
     const messageForm = this.element.querySelector("#message-form");
@@ -36,16 +37,25 @@ class RoomComponent {
       e.preventDefault();
       const message = messageInput.value.trim();
       if (message) {
-        socket.emit("message", { room: this.roomName, text: message });
+        // socket.emit("message", { room: this.roomName, text: message });
+        socket.emit("message", message);
         this.addMessage(`You: ${message}`, "client");
         messageInput.value = "";
       }
     });
 
+    socket.on("joined-message", (msg) => {
+      this.addMessage(msg, "server");
+    });
+
+    socket.on("left-message", (msg) => {
+      this.addMessage(msg, "server");
+    });
+
     socket.on("room-message", (msg) => {
-      if (msg.room === this.roomName) {
-        this.addMessage(`${msg.sender}: ${msg.text}`, "server");
-      }
+      // if (msg.room === this.roomName) {
+      this.addMessage(`${msg.sender}: ${msg.msg}`, "server");
+      // }
     });
 
     return this.element;
