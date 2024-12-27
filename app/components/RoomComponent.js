@@ -37,24 +37,26 @@ class RoomComponent {
       const message = messageInput.value.trim();
       if (message) {
         socket.emit("message", { room: this.roomName, text: message });
-        this.addMessage(`You: ${message}`);
+        this.addMessage(`You: ${message}`, "client");
         messageInput.value = "";
       }
     });
 
     socket.on("room-message", (msg) => {
       if (msg.room === this.roomName) {
-        this.addMessage(`${msg.sender}: ${msg.text}`);
+        this.addMessage(`${msg.sender}: ${msg.text}`, "server");
       }
     });
 
     return this.element;
   }
 
-  addMessage(text) {
+  addMessage(text, from) {
     const messagesDiv = this.element.querySelector("#messages");
     const messageDiv = document.createElement("div");
     messageDiv.textContent = text;
+    messageDiv.className =
+      from === "client" ? "message-client" : "message-server";
     messagesDiv.appendChild(messageDiv);
   }
 
