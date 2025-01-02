@@ -59,6 +59,11 @@ io.on("connection", (socket) => {
       );
     }
   });
+
+  // catch all listener for debugging purposes
+  socket.onAny((event, ...args) => {
+    console.log(event, args);
+  });
 });
 
 // Start the server

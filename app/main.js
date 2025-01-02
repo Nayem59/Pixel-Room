@@ -31,3 +31,8 @@ socket.on("connect", () => {
 socket.on("disconnect", () => {
   console.log("Disconnected from the server");
 });
+
+// catch all listener for debugging purposes
+socket.onAny((event, ...args) => {
+  console.log(event, args);
+});
