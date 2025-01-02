@@ -1,4 +1,5 @@
 import HomeComponent from "./components/HomeComponent.js";
+import LoginComponet from "./components/LoginComponent.js";
 import RoomComponent from "./components/RoomComponent.js";
 
 class App {
@@ -14,13 +15,15 @@ class App {
       if (path.startsWith("/room/")) {
         const roomName = path.split("/room/")[1];
         this.setComponent(new RoomComponent(roomName));
-      } else {
+      } else if (path.startsWith("/home")) {
         this.setComponent(new HomeComponent());
+      } else {
+        this.setComponent(new LoginComponet());
       }
     });
 
     // Render the initial component
-    this.setComponent(new HomeComponent());
+    this.setComponent(new LoginComponet());
   }
 
   setComponent(component) {

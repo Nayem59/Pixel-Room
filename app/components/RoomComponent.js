@@ -16,7 +16,7 @@ class RoomComponent {
       </div>
       <div class="chat-container">
         <div class="messages" id="messages"></div>
-        <form id="message-form">
+        <form id="message-form" autocomplete="off">
           <input id="message-input" type="text" placeholder="Type a message..." />
           <button type="submit">Send</button>
         </form>
@@ -25,7 +25,7 @@ class RoomComponent {
 
     // Attach event listeners
     this.element.querySelector("#back-btn").addEventListener("click", () => {
-      history.pushState({}, "", "/");
+      history.pushState({}, "", "/home");
       app.setComponent(new HomeComponent());
       socket.emit("leave-room", this.roomName);
     });

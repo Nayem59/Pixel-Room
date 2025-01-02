@@ -1,6 +1,6 @@
 import App from "./App.js";
 
-export const socket = io("http://localhost:3000"); // Connect to your server
+export const socket = io("http://localhost:3000", { autoConnect: false }); // Connect to your server
 // Global app state
 export const state = {
   rooms: [
@@ -18,13 +18,18 @@ export const state = {
     "four1",
     "fox1",
   ],
+  currentUsernames: [],
   currentRoom: null,
 };
 export const app = new App();
 
 // Handle connection
 socket.on("connect", () => {
-  console.log("Connected to the server with ID:", socket.id);
+  console.log(
+    "Connected to the server with ID:",
+    socket.id,
+    socket.auth.username
+  );
 });
 
 // Handle disconnection

@@ -9,7 +9,7 @@ class HomeComponent {
 
   render() {
     this.element.innerHTML = `
-      <form class="new-room-form">
+      <form class="new-room-form" autocomplete="off">
         <div class="input-container">
           <label for="new-room">Create a new Room:</label>
           <input id="new-room" class="new-room-input" type="text" placeholder="Room name ..." />

@@ -12,11 +12,23 @@ app.use(express.static("app"));
 
 const userRooms = new Map(); // Map to store each socket's current room
 
+// Middleware
+io.use((socket, next) => {
+  const username = socket.handshake.auth.username;
+
+  //need to handle username validation and duplication here also
+  if (!username) {
+    return next(new Error("invalid username"));
+  }
+  socket.username = username;
+  next();
+});
+
 // Handle Socket.IO connections
 io.on("connection", (socket) => {
-  console.log("A user connected: ", socket.id);
+  console.log("A user connected: ", socket.username, socket.id);
   socket.on("disconnect", () => {
-    console.log("A user disconnected: ", socket.id);
+    console.log("A user disconnected: ", socket.username, socket.id);
     const currentRoom = userRooms.get(socket.id);
     if (currentRoom) {
       socket.leave(currentRoom); // Leave the previous room if any
